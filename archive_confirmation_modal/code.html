@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .modal-blur {
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0ede9",
+                        "on-secondary-container": "#66625e",
+                        "on-primary-fixed": "#2b1700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e5e2de",
+                        "secondary": "#615e5a",
+                        "secondary-fixed-dim": "#cbc5c0",
+                        "surface-dim": "#dcdad6",
+                        "surface-bright": "#fcf9f5",
+                        "inverse-on-surface": "#f3f0ec",
+                        "primary-fixed": "#ffddb9",
+                        "inverse-primary": "#ffb962",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#24351c",
+                        "surface-tint": "#865300",
+                        "surface": "#fcf9f5",
+                        "primary": "#865300",
+                        "secondary-fixed": "#e7e1dc",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#ffb962",
+                        "on-primary-container": "#472a00",
+                        "on-background": "#1c1c1a",
+                        "surface-container-high": "#ebe8e4",
+                        "tertiary-fixed-dim": "#b8cda9",
+                        "outline": "#857463",
+                        "on-primary-fixed-variant": "#663e00",
+                        "primary-container": "#d4870e",
+                        "on-error": "#ffffff",
+                        "tertiary": "#516446",
+                        "surface-variant": "#e5e2de",
+                        "background": "#fcf9f5",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d8c3af",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#101f08",
+                        "on-surface": "#1c1c1a",
+                        "inverse-surface": "#31302e",
+                        "tertiary-container": "#8a9e7d",
+                        "on-tertiary-fixed-variant": "#3a4c30",
+                        "secondary-container": "#e5dfd9",
+                        "on-secondary-fixed-variant": "#494643",
+                        "tertiary-fixed": "#d4e9c4",
+                        "surface-container-low": "#f6f3ef",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#1d1b18",
+                        "on-surface-variant": "#534435"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen overflow-hidden">
+<!-- Navigation Drawer (Shared Component) -->
+<aside class="h-screen w-72 fixed left-0 top-0 bg-[#1C1C1A] dark:bg-black shadow-2xl shadow-black/20 flex flex-col py-8 pl-6 z-10">
+<!-- Profile/Header Section -->
+<div class="flex items-center gap-4 mb-12">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex items-center justify-center">
+<img alt="Julita's Store Logo" class="w-8 h-8" data-alt="Modern abstract geometric logo icon for a boutique brand in amber and cream tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdrCczy6Za-_J5rmvtqssz-jqV-O9GkhzHieXQYUFgfmmPhYM7-MM0X6WquhquIudIBEVp1Cs0gZoeOvPbXi5LP6cvtoGkQUdhAwH8rr0JMockT8tSx7qFtHjzzN_S7cVB3pEPJVw7R6hoQB2F-FllVBcyU-OV1ZhAPodOM949hU8CqW1rCf2MBGBStMOuZfAErUU_yRQMO2Y3rUWOKvHhiVaCIhuTmV7YAnfOfDafBe8ciQOx2zTqr7t-GllV3bTFI46T8nPXyg"/>
+</div>
+<div>
+<h2 class="text-white font-bold tracking-tight text-lg">Julita's Store</h2>
+<div class="flex items-center gap-2">
+<span class="text-white/50 text-xs font-medium">MySQL · Connected</span>
+</div>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white transition-all duration-200 hover:bg-white/10 group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white transition-all duration-200 hover:bg-white/10 group" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="font-medium">Low Stock Alert</span>
+</a>
+<a aria-current="page" class="flex items-center gap-4 px-4 py-3 text-amber-500 font-bold bg-white/5 rounded-r-full mr-4 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="archive" style="font-variation-settings: 'FILL' 1;">archive</span>
+<span class="font-medium">Archive</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white transition-all duration-200 hover:bg-white/10 group" href="#">
+<span class="material-symbols-outlined" data-icon="add_box">add_box</span>
+<span class="font-medium">Add Item</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white transition-all duration-200 hover:bg-white/10 group" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-medium">Search Item</span>
+</a>
+</nav>
+<div class="mt-auto pr-6">
+<a class="flex items-center gap-4 px-4 py-3 text-white/50 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-medium">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas (Background for Modal) -->
+<main class="ml-72 min-h-screen">
+<!-- Top App Bar (Shared Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-18rem)] h-20 bg-[#FCF9F5] dark:bg-stone-900 shadow-[0_8px_32px_rgba(28,28,26,0.06)] flex justify-between items-center px-10 z-10">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-stone-500 hover:bg-stone-100 p-2 rounded-full transition-colors" data-icon="menu">menu</button>
+<h1 class="font-['Plus_Jakarta_Sans'] text-lg font-semibold text-[#1C1C1A] dark:text-white">Inventory Management</h1>
+</div>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-semibold transition-transform duration-300 active:scale-95 shadow-md shadow-primary/20">
+                + Add Item
+            </button>
+</header>
+<!-- Dummy Dashboard Content -->
+<div class="pt-28 px-10 pb-10 space-y-8">
+<div class="flex justify-between items-end">
+<div>
+<span class="text-sm font-bold text-primary-container tracking-widest uppercase">Overview</span>
+<h2 class="text-4xl font-extrabold text-on-background mt-2">Inventory Archive</h2>
+</div>
+</div>
+<!-- Bento-style Content (Blurred Background) -->
+<div class="grid grid-cols-3 gap-6 opacity-40 grayscale-[0.5]">
+<div class="col-span-2 bg-surface-container-low rounded-lg p-8 h-96 flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-dim text-9xl" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-8 h-96 flex flex-col justify-between">
+<div class="w-16 h-16 bg-surface-dim rounded-full"></div>
+<div class="space-y-4">
+<div class="h-4 bg-surface-dim rounded w-3/4"></div>
+<div class="h-4 bg-surface-dim rounded w-1/2"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-on-background/40 modal-blur">
+<!-- Screen 5 — Archive Confirm Modal -->
+<div class="w-full max-w-[420px] bg-surface-container-lowest rounded-lg shadow-[0_32px_64px_rgba(28,28,26,0.15)] overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="relative p-8 flex flex-col items-center text-center">
+<!-- Header/Top: Amber circular icon -->
+<div class="w-16 h-16 bg-primary-container/10 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-container text-3xl" data-icon="archive">archive</span>
+</div>
+<!-- Text Section -->
+<h3 class="text-2xl font-extrabold text-on-background leading-tight">Archive this item?</h3>
+<p class="mt-3 text-secondary text-base leading-relaxed px-2">
+                        This item will be moved to the archive. You can recover it anytime.
+                    </p>
+<!-- Item Summary Card -->
+<div class="w-full mt-8 bg-surface-container-low rounded-DEFAULT p-5 flex items-center gap-4 text-left">
+<div class="w-16 h-16 rounded-DEFAULT bg-surface-container-highest overflow-hidden flex-shrink-0">
+<img alt="Handcrafted Ceramic Pitcher" class="w-full h-full object-cover" data-alt="High-quality studio shot of a handcrafted earthy brown ceramic pitcher on a minimalist stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa5H0lpOYHzCz6OQvhSTyWUMQzwHop9IQQBQohrXqbQm7n6aI5LG7SVtPsLIl91YKMroo9EXdfM0KQSOFhqVhGoVCc1tDnkIzrSvZ4bERl4ss74VfIurOy8aLRvUjaTMJsmpu-kl2pEsahN_fmzufcJIfSqruBc7ypyFQGNl-jBUsprpxztdC8MSoPIOEevlloY84FcS8et1BpZX1ox2uOHNnrhkXrg0cOpuxPDvLRVD12i-7ow7wtY6GTjcu7nyD0ms5D-9CRRA"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-background text-lg">Ceramic Pitcher</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-sm font-medium text-secondary">Qty: 12</span>
+<span class="w-1 h-1 bg-outline-variant/30 rounded-full"></span>
+<span class="text-sm font-bold text-primary">$48.00</span>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="w-full mt-8 flex flex-col gap-3">
+<button class="w-full bg-primary py-4 rounded-full text-white font-bold text-base hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98]">
+                            Move to Archive
+                        </button>
+<button class="w-full bg-transparent border-2 border-outline-variant/30 py-4 rounded-full text-on-surface font-semibold text-base hover:bg-surface-container-low transition-all active:scale-[0.98]">
+                            Cancel
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    (function () {
+        const routes = {
+            dashboard: "../main_dashboard/code.html",
+            add: "../add_item_modal/code.html",
+            archive: "../archive_confirmation_modal/code.html"
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const item = {
+            name: params.get("name") || "Ceramic Pitcher",
+            qty: params.get("qty") || "12",
+            price: params.get("price") || "48.00"
+        };
+
+        const itemName = document.querySelector(".w-full.mt-8 h4");
+        if (itemName) itemName.textContent = item.name;
+
+        const itemMeta = document.querySelectorAll(".w-full.mt-8 .text-sm");
+        if (itemMeta.length >= 2) {
+            itemMeta[0].textContent = `Qty: ${item.qty}`;
+            itemMeta[1].textContent = `P${item.price}`;
+        }
+
+        document.querySelectorAll("aside a").forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                const label = (link.textContent || "").toLowerCase();
+                if (label.includes("archive")) window.location.href = routes.archive;
+                if (label.includes("add item")) window.location.href = routes.add;
+                if (label.includes("dashboard") || label.includes("search") || label.includes("low stock")) {
+                    window.location.href = routes.dashboard;
+                }
+            });
+        });
+
+        const topAddButton = Array.from(document.querySelectorAll("header button")).find((button) =>
+            (button.textContent || "").includes("Add Item")
+        );
+        if (topAddButton) {
+            topAddButton.addEventListener("click", () => {
+                window.location.href = routes.add;
+            });
+        }
+
+        Array.from(document.querySelectorAll(".w-full.mt-8.flex.flex-col button")).forEach((button) => {
+            const label = (button.textContent || "").trim().toLowerCase();
+            if (label.includes("move to archive")) {
+                button.addEventListener("click", () => {
+                    const query = new URLSearchParams({ status: "archived", item: item.name });
+                    window.location.href = `${routes.dashboard}?${query.toString()}`;
+                });
+            }
+            if (label === "cancel") {
+                button.addEventListener("click", () => {
+                    window.location.href = routes.dashboard;
+                });
+            }
+        });
+    })();
+</script>
+</body></html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julita's Store Prototype Hub</title>
+  <style>
+    :root {
+      --bg: #f5efe8;
+      --ink: #1d1c1a;
+      --soft: #6d6053;
+      --card: #fffdfb;
+      --line: #dfc8b2;
+      --accent: #9b5f00;
+      --accent-2: #ce7f00;
+      --shadow: 0 20px 50px rgba(66, 44, 16, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #ffe8ca 0%, transparent 34%),
+        radial-gradient(circle at 92% 85%, #f8d8b0 0%, transparent 28%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, #fff9f2 0%, #fffdfb 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .left {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .flow .item {
+      font-size: 0.82rem;
+      color: var(--soft);
+      padding: 9px 11px;
+      border-radius: 12px;
+      border: 1px dashed var(--line);
+      background: #fff;
+    }
+
+    .cards {
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .card-btn {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 11px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent-2);
+      box-shadow: 0 8px 20px rgba(134, 83, 0, 0.12);
+    }
+
+    .card-btn.active {
+      border-color: var(--accent);
+      background: #fff6ea;
+    }
+
+    .name {
+      display: block;
+      font-weight: 700;
+      font-size: 0.93rem;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--soft);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #fff;
+    }
+
+    .btn.ghost {
+      background: #fff;
+      color: var(--accent);
+      border: 1px solid var(--line);
+    }
+
+    .right {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: calc(100vh - 48px);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px 12px;
+    }
+
+    .screen-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .screen-note {
+      font-size: 0.8rem;
+      color: var(--soft);
+    }
+
+    .preview-wrap {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      flex: 1;
+      min-height: 540px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .right {
+        min-height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside class="panel left">
+      <div>
+        <h1>Julita's Store Prototype Hub</h1>
+        <p class="subtitle">Single main file that connects all screens for your demo.</p>
+      </div>
+
+      <div class="flow">
+        <div class="item">1. Login -> 2. Main Dashboard -> 3. Add / Update / Archive Modals</div>
+        <div class="item">Use this launcher to jump to any screen instantly during presentation.</div>
+      </div>
+
+      <div class="cards" id="screenList"></div>
+
+      <div class="actions">
+        <button class="btn primary" id="startDemo">Start Full Demo</button>
+        <button class="btn ghost" id="openCurrent">Open Current in New Tab</button>
+      </div>
+    </aside>
+
+    <section class="panel right">
+      <div class="topbar">
+        <div>
+          <div class="screen-title" id="screenTitle">Loading...</div>
+          <div class="screen-note" id="screenNote">Preparing preview...</div>
+        </div>
+      </div>
+
+      <div class="preview-wrap">
+        <iframe id="preview" title="Prototype preview" src="julita_s_store_inventory_management/code.html"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const screens = [
+        {
+          key: "login",
+          name: "Login Screen",
+          hint: "Entry point for the prototype",
+          path: "julita_s_store_inventory_management/code.html"
+        },
+        {
+          key: "dashboard",
+          name: "Main Dashboard",
+          hint: "Inventory table, filters, and actions",
+          path: "main_dashboard/code.html"
+        },
+        {
+          key: "add",
+          name: "Add Item Modal",
+          hint: "Add item flow and validation",
+          path: "add_item_modal/code.html"
+        },
+        {
+          key: "update",
+          name: "Update Item Modal",
+          hint: "Edit selected item details",
+          path: "update_item_modal/code.html"
+        },
+        {
+          key: "archive",
+          name: "Archive Confirmation",
+          hint: "Archive item confirmation",
+          path: "archive_confirmation_modal/code.html"
+        }
+      ];
+
+      const list = document.getElementById("screenList");
+      const title = document.getElementById("screenTitle");
+      const note = document.getElementById("screenNote");
+      const frame = document.getElementById("preview");
+      const openCurrent = document.getElementById("openCurrent");
+      const startDemo = document.getElementById("startDemo");
+      let active = screens[0];
+
+      function renderButtons() {
+        list.innerHTML = "";
+        screens.forEach((screen) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "card-btn" + (screen.key === active.key ? " active" : "");
+          button.innerHTML =
+            '<span class="name">' + screen.name + '</span>' +
+            '<span class="hint">' + screen.hint + '</span>';
+          button.addEventListener("click", function () {
+            setActive(screen);
+          });
+          list.appendChild(button);
+        });
+      }
+
+      function setActive(screen) {
+        active = screen;
+        title.textContent = screen.name;
+        note.textContent = screen.hint;
+        frame.src = screen.path;
+        renderButtons();
+      }
+
+      openCurrent.addEventListener("click", function () {
+        window.open(active.path, "_blank");
+      });
+
+      startDemo.addEventListener("click", function () {
+        setActive(screens[0]);
+      });
+
+      setActive(active);
+    })();
+  </script>
+</body>
+</html>

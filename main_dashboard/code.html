@@ -1,0 +1,486 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Julita's Store - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0ede9",
+                        "on-secondary-container": "#66625e",
+                        "on-primary-fixed": "#2b1700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e5e2de",
+                        "secondary": "#615e5a",
+                        "secondary-fixed-dim": "#cbc5c0",
+                        "surface-dim": "#dcdad6",
+                        "surface-bright": "#fcf9f5",
+                        "inverse-on-surface": "#f3f0ec",
+                        "primary-fixed": "#ffddb9",
+                        "inverse-primary": "#ffb962",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#24351c",
+                        "surface-tint": "#865300",
+                        "surface": "#fcf9f5",
+                        "primary": "#865300",
+                        "secondary-fixed": "#e7e1dc",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#ffb962",
+                        "on-primary-container": "#472a00",
+                        "on-background": "#1c1c1a",
+                        "surface-container-high": "#ebe8e4",
+                        "tertiary-fixed-dim": "#b8cda9",
+                        "outline": "#857463",
+                        "on-primary-fixed-variant": "#663e00",
+                        "primary-container": "#d4870e",
+                        "on-error": "#ffffff",
+                        "tertiary": "#516446",
+                        "surface-variant": "#e5e2de",
+                        "background": "#fcf9f5",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d8c3af",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#101f08",
+                        "on-surface": "#1c1c1a",
+                        "inverse-surface": "#31302e",
+                        "tertiary-container": "#8a9e7d",
+                        "on-tertiary-fixed-variant": "#3a4c30",
+                        "secondary-container": "#e5dfd9",
+                        "on-secondary-fixed-variant": "#494643",
+                        "tertiary-fixed": "#d4e9c4",
+                        "surface-container-low": "#f6f3ef",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#1d1b18",
+                        "on-surface-variant": "#534435"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex">
+<!-- NavigationDrawer (Shared Component) -->
+<aside class="h-screen w-72 fixed left-0 top-0 bg-[#1C1C1A] dark:bg-black shadow-2xl shadow-black/20 flex flex-col py-8 pl-6 z-50 font-['Plus_Jakarta_Sans'] text-white antialiased">
+<div class="flex flex-col mb-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: &quot;FILL&quot; 1;">storefront</span>
+</div>
+<h1 class="text-amber-500 font-bold tracking-tight text-xl" style="">Julita's Store</h1>
+</div>
+<p class="text-white/40 text-xs px-1" style="">Artisanal Inventory Management</p>
+</div>
+<nav class="flex-grow space-y-2 pr-6">
+<a class="flex items-center gap-4 px-4 py-3 text-amber-500 font-bold bg-white/5 rounded-r-full mr-4 group transition-all duration-200" href="#" style="">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">dashboard</span>
+<span class="" style="">Dashboard</span>
+</a>
+<a class="flex items-center justify-between gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-r-full group" href="#" style="">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined" style="">warning</span>
+<span class="" style="">Low Stock Alert</span>
+</div>
+<span class="bg-error text-[10px] px-1.5 py-0.5 rounded-full font-bold" style="">3</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-r-full group" href="#" style="">
+<span class="material-symbols-outlined" style="">archive</span>
+<span class="" style="">Archive</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-r-full group" href="#" style="">
+<span class="material-symbols-outlined" style="">add_box</span>
+<span class="" style="">Add Item</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-r-full group" href="#" style="">
+<span class="material-symbols-outlined" style="">search</span>
+<span class="" style="">Search Item</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-r-full group" href="#" style="">
+<span class="material-symbols-outlined" style="">help</span>
+<span class="" style="">Help</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-white/5 pt-6 pr-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="minimal geometric logo of code monkeys creative agency in muted tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQWFVduMFmjPbuWcTpLTj55mObqt83CGr2jgv0o-lBGEM0Gc3NqksCPqJZE0yajCapwe-x7Urx5_8uJGZrXrJb9oZxa3PDsxMmTD7PvioDJ3c99QNN11ty9QDqf39ScK4q8koJHvUiCBF-0aqBKZMdMWeHbHv9x9gn2iVXM7Y4no9taueXxU3ICqENG28xzYny0NmMBUdlfTKxMuAqL0FLvl69vLXA9gExaiOEg8RW36jwYupH5cxl6R1N8zdl5hXjhWreWam2-g" style="">
+</div>
+<div>
+<p class="text-xs font-bold text-white" style="">Code Monkeys</p>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<p class="text-[10px] text-white/50" style="">MySQL · Connected</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-72 flex-grow min-h-screen bg-surface">
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-18rem)] h-20 bg-[#FCF9F5] dark:bg-stone-900 shadow-[0_8px_32px_rgba(28,28,26,0.06)] z-40 flex justify-between items-center px-10 font-['Plus_Jakarta_Sans']">
+<div class="flex items-center gap-4">
+<nav class="flex items-center gap-2 text-stone-500 text-sm font-medium">
+<span class="" style="">Dashboard</span>
+<span class="material-symbols-outlined text-sm" style="">chevron_right</span>
+<span class="text-on-surface font-bold" style="">All Items</span>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative w-80 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50" style="">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary-container/30 transition-all" placeholder="Search items..." type="text">
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" style="">
+<span class="material-symbols-outlined" style="">add</span>
+<span class="" style="">Add Item</span>
+</button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-28 px-10 pb-12 space-y-10">
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- Total Items -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm group hover:shadow-md transition-all border-b-4 border-blue-400/30">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">inventory_2</span>
+</div>
+<span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-full uppercase tracking-wider" style="">+4%</span>
+</div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1" style="">Total Items</p>
+<h3 class="text-3xl font-extrabold text-on-surface" style="">1,284</h3>
+</div>
+<!-- Low Stock -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm group hover:shadow-md transition-all border-b-4 border-error/30">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">warning</span>
+</div>
+<span class="text-[10px] font-bold text-error bg-error-container px-2 py-1 rounded-full uppercase tracking-wider" style="">High Risk</span>
+</div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1" style="">Low Stock</p>
+<h3 class="text-3xl font-extrabold text-on-surface" style="">12</h3>
+</div>
+<!-- Archived -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm group hover:shadow-md transition-all border-b-4 border-amber-400/30">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-700">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">archive</span>
+</div>
+</div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1" style="">Archived</p>
+<h3 class="text-3xl font-extrabold text-on-surface" style="">45</h3>
+</div>
+<!-- Inventory Value -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm group hover:shadow-md transition-all border-b-4 border-tertiary/30">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">payments</span>
+</div>
+</div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1" style="">Inventory Value</p>
+<h3 class="text-2xl font-extrabold text-on-surface" style="">₱ 8,240.00</h3>
+</div>
+<!-- Categories -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm group hover:shadow-md transition-all border-b-4 border-purple-400/30">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">category</span>
+</div>
+</div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1" style="">Categories</p>
+<h3 class="text-3xl font-extrabold text-on-surface" style="">14</h3>
+</div>
+</div>
+<!-- Inventory List Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-bold text-on-surface tracking-tight" style="">Inventory</h2>
+<div class="flex items-center gap-6">
+<div class="bg-surface-container-low p-1 rounded-full flex gap-1">
+<button class="px-5 py-1.5 rounded-full text-sm font-bold bg-primary-container text-on-primary-container transition-all" style="">All</button>
+<button class="px-5 py-1.5 rounded-full text-sm font-bold text-on-surface-variant hover:bg-surface-container-highest transition-all" style="">In Stock</button>
+<button class="px-5 py-1.5 rounded-full text-sm font-bold text-on-surface-variant hover:bg-surface-container-highest transition-all" style="">Low Stock</button>
+</div>
+<div class="flex items-center gap-2 text-sm">
+<span class="text-stone-500 font-medium" style="">Sort By:</span>
+<div class="flex items-center gap-1 font-bold text-on-surface cursor-pointer">
+<span class="" style="">Recent Added</span>
+<span class="material-symbols-outlined text-base" style="">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-surface-container-highest">
+<tr>
+<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">ID</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">Item Name</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">Category</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">Quantity</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">Price</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">Value</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]" style="">Status</th>
+<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em] text-right" style="">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1: Normal -->
+<tr class="group hover:bg-surface-container-low transition-colors duration-150">
+<td class="px-8 py-5 text-sm font-medium text-stone-400" style="">#JL-001</td>
+<td class="px-6 py-5 text-sm font-extrabold text-on-surface" style="">Coca-Cola</td>
+<td class="px-6 py-5" style="">
+<span class="bg-secondary-container text-on-secondary-fixed-variant text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wide" style="">Beverages</span></td>
+<td class="px-6 py-5 text-sm font-bold" style="">13</td>
+<td class="px-6 py-5 text-sm font-medium" style="">₱20.00</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface-variant" style="">₱325</td>
+<td class="px-6 py-5" style="">
+<span class="flex items-center gap-1.5 text-tertiary font-bold text-xs" style="">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        In Stock
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right opacity-0 group-hover:opacity-100 transition-opacity" style="">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">edit</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">inventory_2</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-error" style=""><span class="material-symbols-outlined text-lg text-error" style="">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Low Stock -->
+<tr class="group bg-error-container/10 hover:bg-error-container/20 transition-colors duration-150">
+<td class="px-8 py-5 text-sm font-medium text-stone-400" style="">#JL-002</td>
+<td class="px-6 py-5 text-sm font-extrabold text-on-surface" style="">Pancit Canton</td>
+<td class="px-6 py-5" style="">
+<span class="bg-secondary-container text-on-secondary-fixed-variant text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wide" style="">noodles</span></td>
+<td class="px-6 py-5 text-sm font-black text-error" style="">3</td>
+<td class="px-6 py-5 text-sm font-medium" style="">₱ 15.00</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface-variant" style="">₱ 60</td>
+<td class="px-6 py-5" style="">
+<span class="flex items-center gap-1.5 text-error font-bold text-xs" style="">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+                                        Low Stock
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right opacity-0 group-hover:opacity-100 transition-opacity" style="">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">edit</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">inventory_2</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-error" style=""><span class="material-symbols-outlined text-lg" style="">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Normal -->
+<tr class="group hover:bg-surface-container-low transition-colors duration-150">
+<td class="px-8 py-5 text-sm font-medium text-stone-400" style="">#JL-003</td>
+<td class="px-6 py-5 text-sm font-extrabold text-on-surface" style="">Piattos</td>
+<td class="px-6 py-5" style="">
+<span class="bg-secondary-container text-on-secondary-fixed-variant text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wide" style="">snacks</span></td>
+<td class="px-6 py-5 text-sm font-bold" style="">31</td>
+<td class="px-6 py-5 text-sm font-medium" style="">₱25.50</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface-variant" style="">₱790</td>
+<td class="px-6 py-5" style="">
+<span class="flex items-center gap-1.5 text-tertiary font-bold text-xs" style="">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        In Stock
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right opacity-0 group-hover:opacity-100 transition-opacity" style="">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">edit</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">inventory_2</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-error" style=""><span class="material-symbols-outlined text-lg text-error" style="">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Low Stock -->
+<tr class="group bg-error-container/10 hover:bg-error-container/20 transition-colors duration-150">
+<td class="px-8 py-5 text-sm font-medium text-stone-400" style="">#JL-004</td>
+<td class="px-6 py-5 text-sm font-extrabold text-on-surface" style="">Century Tuna</td>
+<td class="px-6 py-5" style="">
+<span class="bg-secondary-container text-on-secondary-fixed-variant text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wide" style="">canned goods</span></td>
+<td class="px-6 py-5 text-sm font-black text-error" style="">4</td>
+<td class="px-6 py-5 text-sm font-medium" style="">₱43.00</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface-variant" style="">₱172</td>
+<td class="px-6 py-5" style="">
+<span class="flex items-center gap-1.5 text-error font-bold text-xs" style="">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+                                        Low Stock
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right opacity-0 group-hover:opacity-100 transition-opacity" style="">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">edit</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-on-surface-variant" style=""><span class="material-symbols-outlined text-lg" style="">inventory_2</span></button>
+<button class="p-2 hover:bg-white rounded-lg text-error" style=""><span class="material-symbols-outlined text-lg text-error" style="">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-8 py-4 bg-surface-container-low/50 flex items-center justify-between border-t border-surface-container-highest">
+<p class="text-xs text-stone-500 font-medium" style="">Showing 1 to 4 of 1,284 items</p>
+<div class="flex items-center gap-2">
+<button class="p-1.5 hover:bg-surface-container-highest rounded-lg transition-colors" style=""><span class="material-symbols-outlined text-lg" style="">chevron_left</span></button>
+<span class="text-sm font-bold px-3 py-1 bg-primary text-on-primary rounded-lg" style="">1</span>
+<span class="text-sm font-bold px-3 py-1 hover:bg-surface-container-highest rounded-lg cursor-pointer" style="">2</span>
+<span class="text-sm font-bold px-3 py-1 hover:bg-surface-container-highest rounded-lg cursor-pointer" style="">3</span>
+<button class="p-1.5 hover:bg-surface-container-highest rounded-lg transition-colors" style=""><span class="material-symbols-outlined text-lg" style="">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual FAB - suppressed on dashboard as per instructions but adding a refined mini task action -->
+<div class="fixed bottom-10 right-10">
+<button class="w-14 h-14 bg-on-background text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group overflow-hidden" style="">
+<span class="material-symbols-outlined transition-transform duration-300 group-hover:-translate-y-12" style="">receipt_long</span>
+<span class="material-symbols-outlined absolute translate-y-12 transition-transform duration-300 group-hover:translate-y-0" style="">point_of_sale</span>
+</button>
+</div>
+<script>
+    (function () {
+        const routes = {
+            dashboard: "../main_dashboard/code.html",
+            add: "../add_item_modal/code.html",
+            update: "../update_item_modal/code.html",
+            archive: "../archive_confirmation_modal/code.html"
+        };
+
+        function nav(route, params) {
+            const base = routes[route];
+            if (!base) return;
+            if (!params) {
+                window.location.href = base;
+                return;
+            }
+            window.location.href = `${base}?${new URLSearchParams(params).toString()}`;
+        }
+
+        function getText(el) {
+            return (el?.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
+        }
+
+        document.querySelectorAll("aside a").forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                const label = getText(link);
+                if (label.includes("dashboard")) nav("dashboard");
+                if (label.includes("archive")) nav("archive");
+                if (label.includes("add item")) nav("add");
+            });
+        });
+
+        document.querySelectorAll("button").forEach((button) => {
+            const label = getText(button);
+            if (label.includes("add item")) {
+                button.addEventListener("click", () => nav("add"));
+            }
+        });
+
+        const searchInput = document.querySelector('input[placeholder="Search items..."]');
+        const filterButtons = Array.from(document.querySelectorAll("section .bg-surface-container-low button"));
+        const rows = Array.from(document.querySelectorAll("tbody tr"));
+        let activeFilter = "all";
+
+        function rowData(row) {
+            const cells = row.querySelectorAll("td");
+            const id = cells[0]?.textContent.replace("#", "").trim() || "";
+            const name = cells[1]?.textContent.trim() || "";
+            const category = cells[2]?.textContent.trim() || "";
+            const qty = cells[3]?.textContent.trim() || "0";
+            const price = (cells[4]?.textContent || "").replace(/[^\d.]/g, "") || "0";
+            const statusText = (cells[6]?.textContent || "").toLowerCase();
+            const status = statusText.includes("low") ? "low-stock" : "in-stock";
+            return { id, name, category, qty, price, status };
+        }
+
+        function applyFilters() {
+            const q = (searchInput?.value || "").trim().toLowerCase();
+            rows.forEach((row) => {
+                const info = rowData(row);
+                const statusOk = activeFilter === "all" || info.status === activeFilter;
+                const searchOk = !q || info.name.toLowerCase().includes(q) || info.category.toLowerCase().includes(q);
+                row.style.display = statusOk && searchOk ? "" : "none";
+            });
+        }
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const label = getText(button);
+                if (label === "all") activeFilter = "all";
+                if (label.includes("in stock")) activeFilter = "in-stock";
+                if (label.includes("low stock")) activeFilter = "low-stock";
+
+                filterButtons.forEach((other) => {
+                    const selected = other === button;
+                    other.classList.toggle("bg-primary-container", selected);
+                    other.classList.toggle("text-on-primary-container", selected);
+                    other.classList.toggle("text-on-surface-variant", !selected);
+                });
+                applyFilters();
+            });
+        });
+
+        if (searchInput) searchInput.addEventListener("input", applyFilters);
+
+        rows.forEach((row) => {
+            const info = rowData(row);
+            const buttons = row.querySelectorAll("button");
+            buttons.forEach((button) => {
+                const icon = getText(button.querySelector(".material-symbols-outlined"));
+                if (icon === "edit") {
+                    button.addEventListener("click", () => nav("update", info));
+                }
+                if (icon === "delete") {
+                    button.addEventListener("click", () => nav("archive", info));
+                }
+            });
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get("status");
+        const item = params.get("item");
+        if (status && item) {
+            const bar = document.createElement("div");
+            bar.className = "fixed left-1/2 top-24 -translate-x-1/2 bg-on-background text-white text-xs font-semibold px-4 py-2 rounded-full shadow-xl z-50";
+            bar.textContent = `${status.toUpperCase()}: ${item}`;
+            document.body.appendChild(bar);
+            setTimeout(() => bar.remove(), 2200);
+        }
+    })();
+</script>
+</body></html>

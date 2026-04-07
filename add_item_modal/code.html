@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Item - Julita's Store</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0ede9",
+                        "on-secondary-container": "#66625e",
+                        "on-primary-fixed": "#2b1700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e5e2de",
+                        "secondary": "#615e5a",
+                        "secondary-fixed-dim": "#cbc5c0",
+                        "surface-dim": "#dcdad6",
+                        "surface-bright": "#fcf9f5",
+                        "inverse-on-surface": "#f3f0ec",
+                        "primary-fixed": "#ffddb9",
+                        "inverse-primary": "#ffb962",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#24351c",
+                        "surface-tint": "#865300",
+                        "surface": "#fcf9f5",
+                        "primary": "#865300",
+                        "secondary-fixed": "#e7e1dc",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#ffb962",
+                        "on-primary-container": "#472a00",
+                        "on-background": "#1c1c1a",
+                        "surface-container-high": "#ebe8e4",
+                        "tertiary-fixed-dim": "#b8cda9",
+                        "outline": "#857463",
+                        "on-primary-fixed-variant": "#663e00",
+                        "primary-container": "#d4870e",
+                        "on-error": "#ffffff",
+                        "tertiary": "#516446",
+                        "surface-variant": "#e5e2de",
+                        "background": "#fcf9f5",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d8c3af",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#101f08",
+                        "on-surface": "#1c1c1a",
+                        "inverse-surface": "#31302e",
+                        "tertiary-container": "#8a9e7d",
+                        "on-tertiary-fixed-variant": "#3a4c30",
+                        "secondary-container": "#e5dfd9",
+                        "on-secondary-fixed-variant": "#494643",
+                        "tertiary-fixed": "#d4e9c4",
+                        "surface-container-low": "#f6f3ef",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#1d1b18",
+                        "on-surface-variant": "#534435"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            backdrop-filter: blur(12px);
+            background-color: rgba(252, 249, 245, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex items-center justify-center p-6 antialiased">
+<!-- Blurred Background Content (Simulated Dashboard) -->
+<div class="fixed inset-0 z-0 flex pointer-events-none opacity-40 grayscale-[20%]">
+<aside class="h-screen w-72 bg-[#1C1C1A] py-8 pl-6 flex flex-col">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">store</span>
+</div>
+<div>
+<h2 class="text-white font-bold tracking-tight">Julita's Store</h2>
+<p class="text-white/50 text-xs">MySQL · Connected</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<div class="text-amber-500 font-bold bg-white/5 rounded-r-full mr-4 px-4 py-3 flex items-center gap-3">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+                </div>
+<div class="text-white/70 px-4 py-3 flex items-center gap-3">
+<span class="material-symbols-outlined">warning</span> Low Stock Alert
+                </div>
+<div class="text-white/70 px-4 py-3 flex items-center gap-3">
+<span class="material-symbols-outlined">archive</span> Archive
+                </div>
+</nav>
+</aside>
+<main class="flex-1 p-10 bg-surface">
+<div class="h-20 flex justify-between items-center mb-10">
+<h1 class="text-3xl font-extrabold text-on-surface tracking-tight">Inventory Management</h1>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 rounded-lg bg-surface-container-high"></div>
+<div class="h-64 rounded-lg bg-surface-container-high"></div>
+<div class="h-64 rounded-lg bg-surface-container-high"></div>
+</div>
+</main>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 z-40 bg-on-background/20 backdrop-blur-sm"></div>
+<!-- Main Modal Component -->
+<div class="relative z-50 w-full max-w-lg">
+<div class="bg-surface-container-lowest rounded-DEFAULT shadow-[0_32px_64px_-12px_rgba(28,28,26,0.15)] overflow-hidden">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">add_box</span>
+</div>
+<h2 class="text-xl font-bold text-on-surface tracking-tight">Add New Item</h2>
+</div>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Modal Content -->
+<form class="px-8 py-4 space-y-6">
+<!-- Read-Only Item ID -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1">Item ID</label>
+<div class="flex items-center justify-between bg-primary-fixed/30 px-5 py-3 rounded-full">
+<span class="text-on-primary-fixed-variant font-medium">INV-2024-0892</span>
+<span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">Auto-assigned</span>
+</div>
+</div>
+<!-- Item Name -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1" for="item_name">Item Name</label>
+<input autofocus="" class="w-full bg-surface-container-highest border-transparent focus:border-transparent focus:ring-2 focus:ring-primary-container rounded-full px-5 py-3 text-on-surface placeholder:text-on-surface-variant/50 transition-all outline-none" id="item_name" placeholder="Enter product title..." type="text"/>
+</div>
+<!-- Category Dropdown -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1" for="category">Category</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-highest border-transparent focus:border-transparent focus:ring-2 focus:ring-primary-container rounded-full px-5 py-3 text-on-surface outline-none" id="category">
+<option value="">Select a category</option>
+<option value="ceramics">Beverages</option>
+<option value="textiles">Noodles</option>
+<option value="kitchen">Canned goods</option>
+<option value="pantry">Snacks </option>
+</select>
+<div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Quantity and Price -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1" for="quantity">Quantity</label>
+<input class="w-full bg-surface-container-highest border-transparent focus:border-transparent focus:ring-2 focus:ring-primary-container rounded-full px-5 py-3 text-on-surface outline-none" id="quantity" placeholder="0" type="number"/>
+<p class="text-[10px] text-on-secondary-container/60 px-1 italic">Current warehouse stock</p>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1" for="price">Unit Price</label>
+<div class="relative">
+<span class="absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant/70 font-medium">₱</span>
+<input class="w-full bg-surface-container-highest border-transparent focus:border-transparent focus:ring-2 focus:ring-primary-container rounded-full pl-10 pr-5 py-3 text-on-surface outline-none" id="price" placeholder="0.00" type="text"/>
+</div>
+<p class="text-[10px] text-on-secondary-container/60 px-1 italic">Base retail value</p>
+</div>
+</div>
+<!-- Image Upload (Visual Flair) -->
+<div class="relative group cursor-pointer">
+<div class="w-full h-32 rounded-DEFAULT bg-surface-container border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center gap-2 group-hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-outline">add_a_photo</span>
+<span class="text-xs font-medium text-on-surface-variant">Upload Item Image</span>
+</div>
+</div>
+</form>
+<!-- Modal Footer -->
+<div class="px-8 py-8 bg-surface-container-low flex justify-end gap-3">
+<button class="px-8 py-3 rounded-full text-primary font-bold hover:bg-primary/5 transition-all text-sm tracking-tight active:scale-95">
+                    Cancel
+                </button>
+<button class="px-8 py-3 rounded-full bg-gradient-to-b from-primary-container to-primary text-white font-bold shadow-lg shadow-primary-container/20 transition-all text-sm tracking-tight active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+                    Add Item
+                </button>
+</div>
+</div>
+<!-- Designer Tip / Metadata -->
+<div class="mt-6 flex justify-between items-center px-2">
+<div class="flex items-center gap-2 text-on-surface-variant/50">
+<span class="material-symbols-outlined text-sm">info</span>
+<span class="text-[10px] font-medium tracking-wide uppercase">Press Esc to discard changes</span>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full ring-2 ring-surface overflow-hidden bg-stone-300">
+<img class="w-full h-full object-cover" data-alt="portrait of a young woman smiling in a bright airy studio environment with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjdGIToIer0jjpZgcV2AC8duNbYpyF6lhpLxewhFR4VIZiwiRAiUqqAUWxE_pASt9MHuJAUxq0YaArsLzNzvSTHx3KBXnPwanqCo3sidMN9Bv6rV6Ml0S1RV5LbLIaU67rOlcsBexrSubxb-qmrTk88XSheRimSOjuPE9jAAT5FR8FKfz1df19whVxFyLkXV98bRTyKJXhqx5ow3UW6yMd6ROLeeEFs1837ZTy0N9OQfvdOnpsuEHECvPkG8Uz_PyZdbD2zcaN4g"/>
+</div>
+<div class="w-6 h-6 rounded-full ring-2 ring-surface bg-primary-fixed flex items-center justify-center text-[8px] font-bold text-primary">
+                    +2
+                </div>
+</div>
+</div>
+</div>
+<script>
+    (function () {
+        const dashboardRoute = "../main_dashboard/code.html";
+
+        const form = document.querySelector("form");
+        const itemName = document.getElementById("item_name");
+        const category = document.getElementById("category");
+        const quantity = document.getElementById("quantity");
+        const price = document.getElementById("price");
+
+        function goDashboard(status, item) {
+            const query = new URLSearchParams({ status, item });
+            window.location.href = `${dashboardRoute}?${query.toString()}`;
+        }
+
+        function showInlineHint(input, invalid) {
+            if (!input) return;
+            input.classList.toggle("ring-2", invalid);
+            input.classList.toggle("ring-error", invalid);
+        }
+
+        if (form) {
+            form.addEventListener("submit", (event) => event.preventDefault());
+        }
+
+        Array.from(document.querySelectorAll("button")).forEach((button) => {
+            const label = (button.textContent || "").trim().toLowerCase();
+
+            if (label === "cancel") {
+                button.addEventListener("click", () => window.location.href = dashboardRoute);
+            }
+
+            if (label.includes("add item")) {
+                button.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    const nameValue = (itemName?.value || "").trim();
+                    const categoryValue = (category?.value || "").trim();
+                    const qtyValue = Number(quantity?.value || 0);
+                    const priceValue = Number((price?.value || "0").replace(/,/g, ""));
+
+                    const badName = !nameValue;
+                    const badCategory = !categoryValue;
+                    const badQty = !Number.isFinite(qtyValue) || qtyValue <= 0;
+                    const badPrice = !Number.isFinite(priceValue) || priceValue <= 0;
+
+                    showInlineHint(itemName, badName);
+                    showInlineHint(category, badCategory);
+                    showInlineHint(quantity, badQty);
+                    showInlineHint(price, badPrice);
+
+                    if (badName || badCategory || badQty || badPrice) {
+                        return;
+                    }
+
+                    goDashboard("added", nameValue);
+                });
+            }
+        });
+
+        const closeButton = Array.from(document.querySelectorAll("button")).find((button) => {
+            const icon = button.querySelector(".material-symbols-outlined");
+            return icon && (icon.textContent || "").trim() === "close";
+        });
+        if (closeButton) {
+            closeButton.addEventListener("click", () => {
+                window.location.href = dashboardRoute;
+            });
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                window.location.href = dashboardRoute;
+            }
+        });
+    })();
+</script>
+</body></html>
